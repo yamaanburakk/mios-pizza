@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import ImageWithLoader from "./ImageWithLoader";
 
 const pizzaImages = [
   "/images/DSCF0136.JPG",
@@ -105,7 +106,7 @@ const Gallery = () => {
               aria-label={`Pizza görseli ${index + 1}`}
             >
               <div className="relative h-64 sm:h-72 lg:h-80">
-                <Image
+                <ImageWithLoader
                   src={image}
                   alt={`Pizza ${index + 1}`}
                   fill
