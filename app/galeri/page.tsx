@@ -4,29 +4,23 @@ import Image from "next/image";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Link from "next/link";
+import ImageWithLoader from "@/components/ImageWithLoader";
 
 const pizzaImages = [
   "/images/DSCF0136.JPG",
   "/images/DSCF0146.JPG",
   "/images/DSC03913.JPG",
-  "/images/DSC03879.JPG",
   "/images/DSC03880.JPG",
   "/images/DSC03881.JPG",
-  "/images/DSC03882.JPG",
   "/images/DSC03883.JPG",
-  "/images/DSC03884.JPG",
   "/images/DSC03885.JPG",
   "/images/DSC03886.JPG",
-  "/images/DSC03890.JPG",
   "/images/DSC03891.JPG",
-  "/images/DSC03892.JPG",
   "/images/DSC03893.JPG",
   "/images/DSC03894.JPG",
-  "/images/DSC03895.JPG",
   "/images/DSC03897.JPG",
   "/images/DSC03898.JPG",
   "/images/DSC03899.JPG",
-  "/images/DSC03900.JPG",
   "/images/DSC03902.JPG",
   "/images/DSC03903.JPG",
   "/images/DSC03925.JPG",
@@ -149,7 +143,7 @@ export default function GaleriPage() {
                 whileHover={{ y: -10 }}
                 onClick={() => setSelectedImage(image)}
               >
-                <Image
+                <ImageWithLoader
                   src={image}
                   alt={`${activeTab === "pizzalar" ? "Pizza" : "Restoran"} ${index + 1}`}
                   fill

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import ImageWithLoader from "@/components/ImageWithLoader";
 
 const featuredPizzas = [
   {
@@ -43,7 +44,7 @@ const MenuPage = () => {
           animate={{ scale: 1 }}
           transition={{ duration: 1.5 }}
         >
-          <Image
+          <ImageWithLoader
             src="/images/DSC03890.JPG"
             alt="Pizza Menu"
             fill

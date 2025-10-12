@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
+import ImageWithLoader from "./ImageWithLoader";
 
 const testimonials = [
   {
@@ -155,7 +156,7 @@ const Testimonials = () => {
                       className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden ring-2 ring-pizza-red/20 group-hover:ring-pizza-red/40 transition-all"
                       whileHover={{ scale: 1.1 }}
                     >
-                      <Image
+                      <ImageWithLoader
                         src={testimonial.image}
                         alt={testimonial.name}
                         fill

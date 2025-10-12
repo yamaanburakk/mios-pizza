@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import ImageWithLoader from "./ImageWithLoader";
 
 const features = [
   {
@@ -78,7 +79,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl group">
-              <Image
+              <ImageWithLoader
                 src="/images/DSC03925.JPG"
                 alt="Pizza yapım süreci"
                 fill

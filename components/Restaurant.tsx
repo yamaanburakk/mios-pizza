@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import ImageWithLoader from "./ImageWithLoader";
 
 const restaurantImages = [
   "/images/DSC03960.JPG",
@@ -77,7 +78,7 @@ const Restaurant = () => {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <div className="relative w-full h-80 rounded-3xl overflow-hidden shadow-xl">
-                <Image
+                <ImageWithLoader
                   src={image}
                   alt={`Restoran Görünümü ${index + 1}`}
                   fill
