@@ -14,13 +14,11 @@ export const metadata: Metadata = {
   title: "Mios Pizza Restoran İşletmeciliği - İtalyan Lezzetlerinin En Güzel Hali",
   description: "Mios Pizza Restoran İşletmeciliği Ltd. Şti. - İtalyan pizza geleneğini İstanbul'un kalbine taşıyoruz. Taze malzemeler, usta eller ve taş fırınımızla lezzetin zirvesini keşfedin. Kozyatağı, Kadıköy.",
   keywords: ["pizza", "İtalyan pizza", "Kadıköy pizza", "Kozyatağı pizza", "pizza sipariş", "Mios Pizza", "Mios Pizza Restoran"],
-  icons: {
-    icon: '/images/pizza_mios_logo.jpg',
-  },
   openGraph: {
     title: "Mios Pizza Restoran İşletmeciliği - İtalyan Lezzetlerinin En Güzel Hali",
     description: "Taze malzemeler ve taş fırın lezzetiyle İtalyan pizzalarının en güzel hali. info@miospizza.com.tr",
     type: "website",
+    images: ['/images/pizza_mios_logo.jpg'],
   },
 };
 
