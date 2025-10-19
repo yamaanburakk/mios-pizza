@@ -151,19 +151,26 @@ export default function Home() {
 
           {/* PDF Viewer */}
           <motion.div
-            className="max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 50 }}
+            className="max-w-5xl md:max-w-xl mx-auto"
+            initial={{ opacity: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="bg-white rounded-2xl lg:rounded-3xl shadow-2xl border border-gray-200 overflow-hidden overflow-x-auto">
+            <div className="bg-white rounded-2xl lg:rounded-3xl shadow-2xl border border-gray-200 overflow-hidden">
               {/* PDF Content */}
-              <div className="relative overflow-x-auto">
+              <div className="w-full flex justify-center items-center">
+                {/* Mobile PDF - Full page fit */}
                 <iframe
-                  src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-                  className="w-full h-[500px] sm:h-[650px] lg:h-[750px] min-w-[600px]"
-                  title="Mios Pizza Menü"
+                  src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
+                  className="w-full h-[500px] sm:hidden"
+                  title="Mios Pizza Menü - Mobile"
+                />
+                {/* Desktop PDF - Full page fit */}
+                <iframe
+                  src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitV"
+                  className="w-[800px] h-[500px] sm:h-[650px] lg:h-[700px] hidden sm:block"
+                  title="Mios Pizza Menü - Desktop"
                 />
               </div>
             </div>

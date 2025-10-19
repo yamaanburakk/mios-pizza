@@ -216,7 +216,7 @@ const Restaurant = () => {
               transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
             >
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-sm border border-gray-200">
-                <div className="w-8 h-8 sm:w-10 sm:h-10">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center">
                   {feature.icon}
                 </div>
               </div>
