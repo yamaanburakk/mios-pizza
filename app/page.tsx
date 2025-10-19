@@ -2,12 +2,28 @@
 
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import ImageWithLoader from "@/components/ImageWithLoader";
+import dynamic from 'next/dynamic';
+
+// Create a separate component for the PDF viewer to isolate the react-pdf import
+const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex justify-center items-center h-96">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pizza-red"></div>
+    </div>
+  )
+});
 
 export default function Home() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div className="bg-gray-50">
@@ -151,29 +167,13 @@ export default function Home() {
 
           {/* PDF Viewer */}
           <motion.div
-            className="max-w-5xl md:max-w-xl mx-auto"
+            className="max-w-4xl mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="bg-white rounded-2xl lg:rounded-3xl shadow-2xl border border-gray-200 overflow-hidden">
-              {/* PDF Content */}
-              <div className="w-full flex justify-center items-center">
-                {/* Mobile PDF - Mobile optimized */}
-                <iframe
-                  src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=75"
-                  className="w-[300px] h-[300px] sm:hidden"
-                  title="Mios Pizza Menü - Mobile"
-                />
-                {/* Desktop PDF - Full page fit */}
-                <iframe
-                  src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitV"
-                  className="w-[800px] h-[500px] sm:h-[650px] lg:h-[700px] hidden sm:block"
-                  title="Mios Pizza Menü - Desktop"
-                />
-              </div>
-            </div>
+            {mounted && <PDFViewer />}
           </motion.div>
         </div>
       </section>
