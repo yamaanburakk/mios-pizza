@@ -163,7 +163,7 @@ export default function Home() {
                 {/* Mobile PDF - Mobile optimized */}
                 <iframe
                   src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=75"
-                  className="w-full h-[500px] sm:hidden"
+                  className="w-[300px] h-[300px] sm:hidden"
                   title="Mios Pizza Menü - Mobile"
                 />
                 {/* Desktop PDF - Full page fit */}
