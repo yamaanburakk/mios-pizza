@@ -160,9 +160,9 @@ export default function Home() {
             <div className="bg-white rounded-2xl lg:rounded-3xl shadow-2xl border border-gray-200 overflow-hidden">
               {/* PDF Content */}
               <div className="w-full flex justify-center items-center">
-                {/* Mobile PDF - Full page fit */}
+                {/* Mobile PDF - Mobile optimized */}
                 <iframe
-                  src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
+                  src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=75"
                   className="w-full h-[500px] sm:hidden"
                   title="Mios Pizza Menü - Mobile"
                 />
