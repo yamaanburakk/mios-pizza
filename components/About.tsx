@@ -20,12 +20,6 @@ const features = [
     color: "from-pizza-green to-pizza-green-dark",
   },
   {
-    icon: "🔥",
-    title: "Taş Fırın",
-    description: "Geleneksel taş fırınımızda, yüksek ısıda pişen pizzalarımız eşsiz bir lezzet ve doku kazanıyor.",
-    color: "from-pizza-yellow to-orange-500",
-  },
-  {
     icon: "❤️",
     title: "Sevgiyle Yapıldı",
     description: "Her pizza, tutkuyla ve özenle hazırlanıyor. Müşteri memnuniyeti bizim için her şeyden önce geliyor.",
@@ -63,7 +57,7 @@ const About = () => {
             </span>
           </motion.div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-800 mb-4 sm:mb-6 px-4">
-            Lezzet <span className="gradient-text">Hikayemiz</span>
+            Lezzet <span className="text-gray-800">Hikayemiz</span>
           </h2>
           <div className="w-24 sm:w-32 h-1 sm:h-2 bg-gradient-to-r from-pizza-red via-pizza-yellow to-pizza-green rounded-full mx-auto mb-6 sm:mb-8"></div>
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto font-light leading-relaxed px-4">
@@ -154,7 +148,7 @@ const About = () => {
         >
           <div className="inline-block bg-gradient-to-r from-pizza-red/10 via-pizza-yellow/10 to-pizza-green/10 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12">
             <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-light text-gray-700 mb-4 sm:mb-6">
-              &quot;Her lokmada <span className="font-bold gradient-text">İtalya&apos;nın</span> sıcaklığını hissedin&quot;
+              &quot;Her lokmada <span className="font-bold text-gray-700">İtalya&apos;nın</span> sıcaklığını hissedin&quot;
             </p>
             <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
               {["Taze", "Lezzetli", "Özel", "Kaliteli"].map((tag, index) => (

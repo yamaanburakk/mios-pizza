@@ -70,7 +70,7 @@ export default function GaleriPage() {
               </span>
             </motion.div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Fotoğraf <span className="gradient-text">Galerisi</span>
+              Fotoğraf <span className="text-white">Galerisi</span>
             </h1>
             <div className="w-32 h-2 bg-gradient-to-r from-pizza-red via-pizza-yellow to-pizza-green rounded-full mx-auto mb-8"></div>
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-light mb-8">
