@@ -22,11 +22,11 @@ const Navbar = () => {
   };
 
   const menuItems = [
-    { href: "/", label: "Ana Sayfa" },
-    { href: "/#hakkimizda", label: "Hakkımızda" },
-    { href: "/menuler", label: "Menülerimiz" },
+    { href: "/anasayfa", label: "Ana Sayfa" },
+    { href: "/anasayfa#hakkimizda", label: "Hakkımızda" },
+    { href: "/", label: "Menülerimiz" },
     { href: "/galeri", label: "Galeri" },
-    { href: "/#iletisim", label: "İletişim" },
+    { href: "/anasayfa#iletisim", label: "İletişim" },
   ];
 
   return (

@@ -18,7 +18,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black pt-16 sm:pt-20">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
@@ -63,7 +63,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-8 sm:py-12">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -78,20 +78,9 @@ const Hero = () => {
             <span className="block sm:inline">Mios Pizza&apos;ya</span>
             <br />
             <span className="relative inline-block">
-              <span className="relative z-10 bg-gradient-to-r from-pizza-yellow via-pizza-red to-pizza-yellow bg-clip-text text-transparent">
+              <span className="relative z-10 text-white">
                 Hoş Geldiniz
               </span>
-              <motion.div
-                className="absolute -inset-2 bg-gradient-to-r from-pizza-red/20 to-pizza-yellow/20 blur-xl"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.5, 0.8, 0.5],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                }}
-              />
             </span>
           </motion.h1>
         </motion.div>
@@ -105,12 +94,12 @@ const Hero = () => {
           <span className="block sm:inline">İtalyan lezzetlerinin en elit hali</span>
           <br className="hidden sm:block" />
           <span className="block sm:inline mt-2 sm:mt-0">
-            <span className="text-pizza-yellow font-medium">Taze • Özel • Unutulmaz</span>
+            <span className="text-white font-medium">Taze • Özel • Unutulmaz</span>
           </span>
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4"
+          className="hidden sm:flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -161,11 +150,16 @@ const Hero = () => {
           ].map((stat, index) => (
             <motion.div
               key={index}
-              className="glass-dark rounded-2xl p-4 sm:p-6 backdrop-blur-xl"
-              whileHover={{ y: -10, scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              className="text-center"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+              whileHover={{
+                scale: 1.05,
+                transition: { type: "spring", stiffness: 300 }
+              }}
             >
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text mb-1 sm:mb-2">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2">
                 {stat.number}
               </div>
               <div className="text-xs sm:text-sm text-gray-300 text-center">{stat.label}</div>
