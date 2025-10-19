@@ -2,18 +2,15 @@
 
 const PDFViewerComponent = () => {
   return (
-    <div className="bg-white rounded-2xl lg:rounded-3xl shadow-2xl border border-gray-200 overflow-hidden">
+    <div className="bg-white rounded-2xl lg:rounded-3xl shadow-2xl border border-gray-200">
       {/* PDF Content */}
-      <div className="px-4 sm:p-6">
+        <div className="px-4 sm:p-6">
         {/* Mobile PDF - 50% zoom */}
-        <div className="sm:hidden h-[450px] rounded-lg">
           <iframe
-            src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=50"
-            className="w-[200%] h-[900px] rounded-lg border-0"
-            style={{ transform: 'scale(0.5)', transformOrigin: 'top left' }}
-            title="Mios Pizza Menü - Mobile"
-          />
-        </div>
+          src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&zoom=50"
+          className="w-full h-[450px] sm:hidden rounded-lg border-0"
+          title="Mios Pizza Menü - Mobile"
+        />
         
         {/* Desktop PDF - Normal zoom */}
         <iframe
