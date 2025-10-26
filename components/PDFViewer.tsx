@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Document, Page, pdfjs } from 'react-pdf';
 
@@ -12,57 +12,80 @@ if (typeof window !== 'undefined') {
 export default function PDFViewer() {
   const [pageNumber, setPageNumber] = useState(1);
   const [numPages, setNumPages] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
 
-  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+  const onDocumentLoadSuccess = useCallback(({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
-    setLoading(false);
-  };
+  }, []);
 
-  const goToPrevPage = () => {
-    setPageNumber(prev => Math.max(prev - 1, 1));
-  };
+  const onPageLoadStart = useCallback(() => {
+    setLoadingPages(prev => new Set(prev).add(pageNumber));
+  }, [pageNumber]);
 
-  const goToNextPage = () => {
-    setPageNumber(prev => Math.min(prev + 1, numPages));
-  };
+  const onPageLoadSuccess = useCallback(() => {
+    setLoadingPages(prev => {
+      const newSet = new Set(prev);
+      newSet.delete(pageNumber);
+      return newSet;
+    });
+  }, [pageNumber]);
+
+  const isPageLoading = loadingPages.has(pageNumber);
+
+  const goToPrevPage = useCallback(() => {
+    setPageNumber(prev => prev - 1);
+  }, []);
+
+  const goToNextPage = useCallback(() => {
+    setPageNumber(prev => prev + 1);
+  }, [numPages]);
+
+  const scale = useMemo(() => {
+    if (typeof window === 'undefined') return 0.8;
+    return window.innerWidth > 640 ? 0.8 : 0.5;
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center p-2 sm:p-4">
-      {/* PDF Görüntüleyici */}
-      <div className="relative w-full max-w-4xl">
-        <div className="bg-transparent rounded-xl overflow-hidden">
-          <div className="relative flex items-center justify-center">
-            {loading && (
-              <div className="flex items-center justify-center h-full">
-                <div className="text-red-600 text-lg font-semibold">Menü yükleniyor...</div>
-              </div>
-            )}
-            <Document
-              file="/MENU.pdf"
-              onLoadSuccess={onDocumentLoadSuccess}
-              loading={<div className="text-red-600">Yükleniyor...</div>}
-              error={
-                <div className="text-red-600 p-4 text-center">
-                  PDF yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.
+        {/* PDF Görüntüleyici */}
+        <div className="relative w-full max-w-4xl">
+          <div className="bg-transparent rounded-xl overflow-hidden">
+            <div className="relative flex items-center justify-center" style={{ minHeight: '600px' }}>
+              <Document
+                file="/MENU.pdf"
+                onLoadSuccess={onDocumentLoadSuccess}
+                loading={null}
+                error={
+                  <div className="text-red-600 p-4 text-center">
+                    PDF yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.
+                  </div>
+                }
+                className="flex items-center justify-center"
+              >
+                <div className="relative">
+                  <Page
+                    key={pageNumber}
+                    pageNumber={pageNumber}
+                    className="max-w-full"
+                    renderTextLayer={true}
+                    renderAnnotationLayer={true}
+                    scale={scale}
+                    onLoadStart={onPageLoadStart}
+                    onRenderSuccess={onPageLoadSuccess}
+                  />
+                  {isPageLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 min-h-[600px]">
+                      <div className="text-red-600 text-lg font-semibold">Sayfa yükleniyor...</div>
+                    </div>
+                  )}
                 </div>
-              }
-              className="flex items-center justify-center"
-            >
-              <Page
-                pageNumber={pageNumber}
-                className="max-w-full"
-                renderTextLayer={true}
-                renderAnnotationLayer={true}
-                scale={typeof window !== 'undefined' && window.innerWidth > 640 ? 0.8 : 0.6}
-              />
-            </Document>
+              </Document>
+            </div>
           </div>
         </div>
-      </div>
 
       {/* Navigasyon Butonları */}
-      {!loading && numPages > 0 && (
+      {numPages > 0 && (
         <>
           <div className="mt-6 flex flex-row items-center gap-4">
             <motion.button
