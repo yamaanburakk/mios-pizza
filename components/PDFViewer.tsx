@@ -1,26 +1,28 @@
-"use client";
+'use client';
 
-const PDFViewerComponent = () => {
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+export default function PDFViewer() {
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const goToPrevPage = () => {
+    setPageNumber(prev => Math.max(prev - 1, 1));
+  };
+
+  const goToNextPage = () => {
+    setPageNumber(prev => Math.min(prev + 1, 10));
+  };
+
   return (
-    <div className="bg-white rounded-2xl lg:rounded-3xl shadow-2xl border border-gray-200">
-      {/* PDF Content */}
-        <div className="px-4 sm:p-6">
-        {/* Mobile PDF - 50% zoom */}
-          <iframe
-          src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&zoom=50"
-          className="w-full h-[450px] sm:hidden rounded-lg border-0"
-          title="Mios Pizza Menü - Mobile"
-        />
-        
-        {/* Desktop PDF - Normal zoom */}
+    <div className="flex flex-col items-center min-h-screen bg-gray-50 p-4">
+      <div className="bg-white rounded-2xl lg:rounded-3xl shadow-2xl border border-gray-200 overflow-hidden w-full h-[calc(100vh-160px)]">
         <iframe
-          src="/MENU.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
-          className="w-full h-[600px] sm:h-[700px] lg:h-[700px] hidden sm:block rounded-lg border-0"
-          title="Mios Pizza Menü - Desktop"
+          src={`/MENU.pdf#page=${pageNumber}&toolbar=0&navpanes=0&scrollbar=0&view=Fit`}
+          className="w-full h-full"
+          title="Mios Pizza Menü"
         />
       </div>
     </div>
   );
-};
-
-export default PDFViewerComponent;
+}

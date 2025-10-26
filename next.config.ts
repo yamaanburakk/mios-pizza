@@ -8,27 +8,19 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
+  transpilePackages: ["react-pdf", "pdfjs-dist"],
   typescript: {
     ignoreBuildErrors: false,
   },
- webpack: (config, { isServer }) => {
-    // Fix for canvas module (not needed in browser)
-    config.resolve.alias.canvas = false;
-    config.resolve.alias.encoding = false;
-    
-    // Handle pdfjs-dist properly
+  webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
         canvas: false,
         encoding: false,
+        fs: false,
       };
     }
-
-    // Ignore pdfjs worker warnings
-    config.infrastructureLogging = {
-      level: 'error',
-    };
 
     return config;
   },
