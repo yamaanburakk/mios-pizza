@@ -37,7 +37,6 @@ export default function Home() {
             loop
             playsInline
             className="w-full h-full object-cover"
-            poster="/images/DSC03890.JPG"
           >
             <source src="/videos/pizza-hero.mp4" type="video/mp4" />
           </video>

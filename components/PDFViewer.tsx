@@ -50,7 +50,7 @@ export default function PDFViewer() {
         {/* PDF Görüntüleyici */}
         <div className="relative w-full max-w-4xl">
           <div className="bg-transparent rounded-xl overflow-hidden">
-            <div className="relative flex items-center justify-center" style={{ minHeight: '600px' }}>
+            <div className="relative flex items-center justify-center">
               <Document
                 file="/MENU.pdf"
                 onLoadSuccess={onDocumentLoadSuccess}
