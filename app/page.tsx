@@ -143,16 +143,16 @@ export default function Home() {
 
 
       {/* PDF Menu Viewer */}
-      <section className="py-12 sm:py-16 bg-gray-50 relative overflow-hidden">
+      <section className="py-6 sm:py-16 bg-gray-50 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="text-center mb-12 sm:mb-16 lg:mb-20 px-4"
+            className="text-center mb-8 sm:mb-16 lg:mb-20 px-4"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <motion.span
-              className="inline-block px-4 sm:px-6 py-2 bg-pizza-red/10 rounded-full text-pizza-red font-semibold text-xs sm:text-sm mb-4 sm:mb-6"
+              className="inline-block px-4 sm:px-6 py-2 bg-pizza-red/10 rounded-full text-pizza-red font-semibold text-xs sm:text-sm sm:mb-6"
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
