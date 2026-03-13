@@ -9,10 +9,7 @@ export default function AnaSayfa() {
   return (
     <>
       <Hero />
-      <About />
       <Restaurant />
-      <Gallery />
-      <Testimonials />
       <Contact />
     </>
   );

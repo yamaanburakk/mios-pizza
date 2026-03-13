@@ -20,7 +20,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
           {/* Animated Background Shapes */}
           <div className="absolute inset-0 overflow-hidden">
             <motion.div
-              className="absolute top-1/4 left-1/4 w-96 h-96 bg-pizza-red/20 rounded-full blur-3xl"
+              className="absolute top-1/4 left-1/4 w-96 h-96 bg-dark-green/20 rounded-full blur-3xl"
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.3, 0.6, 0.3],
@@ -32,7 +32,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
               }}
             />
             <motion.div
-              className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pizza-green/20 rounded-full blur-3xl"
+              className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-dark-green/20 rounded-full blur-3xl"
               animate={{
                 scale: [1.2, 1, 1.2],
                 opacity: [0.3, 0.6, 0.3],
@@ -42,18 +42,6 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
                 repeat: Infinity,
                 ease: "easeInOut",
                 delay: 1.5,
-              }}
-            />
-            <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pizza-yellow/20 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.2, 0.5, 0.2],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
               }}
             />
           </div>
@@ -74,7 +62,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
             >
               {/* Pulsing Glow Ring */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-pizza-red via-pizza-yellow to-pizza-green rounded-full blur-2xl"
+                className="absolute inset-0 bg-dark-green rounded-full blur-2xl"
                 animate={{
                   scale: [1, 1.3, 1],
                   opacity: [0.5, 0.8, 0.5],
@@ -86,7 +74,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
                 }}
               />
 
-              {/* Rotating Border */}
+              {/* Rotating Border - tek renk koyu yeşil */}
               <motion.div
                 className="absolute -inset-4"
                 animate={{ rotate: 360 }}
@@ -96,7 +84,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
                   ease: "linear",
                 }}
               >
-                <div className="w-full h-full border-4 border-transparent border-t-pizza-red border-r-pizza-yellow border-b-pizza-green rounded-full"></div>
+                <div className="w-full h-full border-4 border-transparent border-t-dark-green rounded-full"></div>
               </motion.div>
 
               {/* Logo */}
@@ -149,7 +137,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
               {[0, 1, 2].map((index) => (
                 <motion.div
                   key={index}
-                  className="w-3 h-3 bg-gradient-to-r from-pizza-red to-pizza-yellow rounded-full"
+                  className="w-3 h-3 bg-dark-green rounded-full"
                   animate={{
                     scale: [1, 1.5, 1],
                     opacity: [0.3, 1, 0.3],
@@ -166,7 +154,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
             {/* Progress Bar */}
             <div className="w-64 sm:w-80 h-2 bg-gray-800 rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-pizza-red via-pizza-yellow to-pizza-green"
+                className="h-full bg-dark-green"
                 initial={{ x: "-100%" }}
                 animate={{ x: "100%" }}
                 transition={{
@@ -183,7 +171,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
             {[...Array(10)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-2 h-2 bg-pizza-yellow/30 rounded-full"
+                className="absolute w-2 h-2 bg-dark-green/30 rounded-full"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,

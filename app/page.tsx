@@ -11,7 +11,7 @@ const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
   ssr: false,
   loading: () => (
     <div className="flex justify-center items-center h-96">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pizza-red"></div>
+      <div className="animate-spin rounded-full h-12 w-12 border-2 border-transparent border-t-dark-green"></div>
     </div>
   )
 });
@@ -161,7 +161,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-800 mb-4 sm:mb-6">
               Tam <span className="text-gray-800">Menü</span>
             </h2>
-            <div className="w-24 sm:w-32 h-1 sm:h-2 bg-gradient-to-r from-pizza-red via-pizza-yellow to-pizza-green rounded-full mx-auto"></div>
+            <div className="w-24 sm:w-32 h-1 sm:h-2 bg-dark-green rounded-full mx-auto"></div>
           </motion.div>
 
           {/* PDF Viewer */}

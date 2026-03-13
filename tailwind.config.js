@@ -8,12 +8,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'pizza-red': '#dc2626',
-        'pizza-red-dark': '#991b1b',
-        'pizza-green': '#25D366', // WhatsApp yeşili
-        'pizza-green-dark': '#128C7E',
-        'pizza-yellow': '#fbbf24',
-        'pizza-gold': '#d4af37',
+        // Ana palet: koyu yeşil, kiremit, açık krem
+        'dark-green': '#1B4332',
+        'dark-green-dark': '#0D2818',
+        terracotta: '#C45C3E',
+        'terracotta-dark': '#A63D2E',
+        cream: '#F5F0E6',
+        'cream-dark': '#E8E0D5',
+        // Eski sınıf adlarıyla uyumluluk (yeni palete yönlendirme)
+        'pizza-red': '#C45C3E',
+        'pizza-red-dark': '#A63D2E',
+        'pizza-green': '#1B4332',
+        'pizza-green-dark': '#0D2818',
+        'pizza-yellow': '#F5F0E6',
+        'pizza-gold': '#C45C3E',
         'whatsapp': '#25D366',
         'whatsapp-dark': '#128C7E',
         'instagram': '#E4405F',

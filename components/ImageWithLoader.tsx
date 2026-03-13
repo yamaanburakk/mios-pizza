@@ -77,7 +77,7 @@ const ImageWithLoader = ({
             {/* Spinning Ring */}
             <div className="absolute inset-0 flex items-center justify-center">
               <motion.div
-                className="w-24 h-24 border-4 border-transparent border-t-pizza-red border-r-pizza-yellow border-b-pizza-green rounded-full"
+                className="w-24 h-24 border-4 border-transparent border-t-dark-green rounded-full"
                 animate={{ rotate: 360 }}
                 transition={{
                   duration: 2,

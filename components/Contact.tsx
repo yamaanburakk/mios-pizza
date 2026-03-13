@@ -81,7 +81,7 @@ const Contact = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-800 mb-4 sm:mb-6 px-4">
             Bize <span className="text-gray-800">Ulaşın</span>
           </h2>
-          <div className="w-24 sm:w-32 h-1 sm:h-2 bg-gradient-to-r from-pizza-red via-pizza-yellow to-pizza-green rounded-full mx-auto mb-6 sm:mb-8"></div>
+          <div className="w-24 sm:w-32 h-1 sm:h-2 bg-dark-green rounded-full mx-auto mb-6 sm:mb-8"></div>
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto font-light px-4">
             Sipariş vermek veya bilgi almak için bize ulaşın
           </p>

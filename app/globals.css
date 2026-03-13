@@ -7,13 +7,20 @@
 @import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 :root {
-  --background: #f8f9fa;
-  --foreground: #2d3748;
+  /* Ana palet: koyu yeşil, kiremit, açık krem */
+  --dark-green: #1B4332;
+  --dark-green-dark: #0D2818;
+  --terracotta: #C45C3E;
+  --terracotta-dark: #A63D2E;
+  --cream: #F5F0E6;
+  --cream-dark: #E8E0D5;
+  --background: #F5F0E6;
+  --foreground: #1B4332;
 }
 
 body {
-  background: #f8f9fa;
-  color: #2d3748;
+  background: var(--cream);
+  color: var(--foreground);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
@@ -36,16 +43,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--cream-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--pizza-red), var(--pizza-red-dark));
+  background: linear-gradient(180deg, var(--terracotta), var(--terracotta-dark));
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--pizza-red-dark);
+  background: var(--terracotta-dark);
 }
 
 /* Glassmorphism utility */
@@ -63,9 +70,9 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Gradient Text */
+/* Gradient Text - koyu yeşil, kiremit, açık krem */
 .gradient-text {
-  background: linear-gradient(135deg, #dc2626, #fbbf24, #25D366);
+  background: linear-gradient(135deg, var(--dark-green), var(--terracotta), var(--cream-dark));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -107,15 +114,15 @@ html {
   animation: float 6s ease-in-out infinite;
 }
 
-/* Glow Effect */
+/* Glow Effect - kiremit ve koyu yeşil */
 .glow {
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.3),
-              0 0 40px rgba(220, 38, 38, 0.2),
-              0 0 60px rgba(220, 38, 38, 0.1);
+  box-shadow: 0 0 20px rgba(196, 92, 62, 0.3),
+              0 0 40px rgba(196, 92, 62, 0.2),
+              0 0 60px rgba(196, 92, 62, 0.1);
 }
 
 .glow-green {
-  box-shadow: 0 0 20px rgba(22, 163, 74, 0.3),
-              0 0 40px rgba(22, 163, 74, 0.2),
-              0 0 60px rgba(22, 163, 74, 0.1);
+  box-shadow: 0 0 20px rgba(27, 67, 50, 0.3),
+              0 0 40px rgba(27, 67, 50, 0.2),
+              0 0 60px rgba(27, 67, 50, 0.1);
 }

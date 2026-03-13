@@ -17,11 +17,11 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden">
+    <footer className="relative bg-cream-dark text-dark-green overflow-hidden">
       {/* Animated Background */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-pizza-red rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pizza-green rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-terracotta rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-dark-green rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
@@ -48,11 +48,11 @@ const Footer = () => {
                 />
               </motion.div>
               <div>
-                <span className="text-2xl sm:text-3xl font-bold block">Mios Pizza</span>
-                <span className="text-xs sm:text-sm text-gray-400">İtalyan Lezzetleri</span>
+                <span className="text-2xl sm:text-3xl font-bold block text-dark-green">Mios Pizza</span>
+                <span className="text-xs sm:text-sm text-dark-green/70">İtalyan Lezzetleri</span>
               </div>
             </div>
-            <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6 leading-relaxed max-w-md">
+            <p className="text-sm sm:text-base text-dark-green/80 mb-4 sm:mb-6 leading-relaxed max-w-md">
               Mios Pizza Restoran İşletmeciliği Ltd. Şti. - İtalyan pizza geleneğini İstanbul&apos;un kalbine taşıyoruz. 
               Taze malzemeler ve usta ellerle lezzetin zirvesini keşfedin.
             </p>
@@ -61,7 +61,7 @@ const Footer = () => {
                 href="https://instagram.com/pizzamios"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-instagram to-instagram-dark rounded-lg sm:rounded-xl flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-instagram to-instagram-dark rounded-lg sm:rounded-xl flex items-center justify-center hover:scale-110 transition-transform shadow-lg text-white"
                 whileHover={{ y: -5 }}
                 aria-label="Instagram"
               >
@@ -73,7 +73,7 @@ const Footer = () => {
                 href="https://wa.me/905313455800"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-whatsapp to-whatsapp-dark rounded-lg sm:rounded-xl flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-whatsapp to-whatsapp-dark rounded-lg sm:rounded-xl flex items-center justify-center hover:scale-110 transition-transform shadow-lg text-white"
                 whileHover={{ y: -5 }}
                 aria-label="WhatsApp"
               >
@@ -91,27 +91,10 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-white">Çalışma Saatleri</h3>
-            <div className="space-y-2 sm:space-y-3">
-              <div className="flex justify-between items-center text-sm sm:text-base text-gray-400">
-                <span className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-pizza-red rounded-full"></span>
-                  Pazartesi - Cumartesi
-                </span>
-                <span className="font-medium">11:00 - 22:45</span>
-              </div>
-              <div className="flex justify-between items-center text-sm sm:text-base text-gray-400">
-                <span className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-pizza-yellow rounded-full"></span>
-                  Pazar
-                </span>
-                <span className="font-medium">12:00 - 22:45</span>
-              </div>
-            </div>
-            <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-pizza-red/10 to-pizza-green/10 rounded-lg border border-pizza-red/20">
-              <p className="text-xs sm:text-sm text-gray-300 text-center">
-                <span className="font-semibold text-pizza-red">🚚</span> Teslimat saatleri: 11:00 - 22:30
-              </p>
+            <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-dark-green">Çalışma Saatleri</h3>
+            <div className="flex items-center gap-2 text-sm sm:text-base text-dark-green/80">
+              <span className="w-2 h-2 bg-terracotta rounded-full flex-shrink-0"></span>
+              <span className="font-medium">Her gün 11:00 - 22:30</span>
             </div>
           </motion.div>
 
@@ -122,7 +105,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-white">İletişim</h3>
+            <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-dark-green">İletişim</h3>
             <ul className="space-y-3 sm:space-y-4">
               {footerLinks.iletisim.map((link, index) => (
                 <motion.li key={index} whileHover={{ x: 5 }}>
@@ -130,14 +113,14 @@ const Footer = () => {
                     href={link.href}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
                     rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors flex items-center gap-2 sm:gap-3 group"
+                    className="text-sm sm:text-base text-dark-green/80 hover:text-terracotta transition-colors flex items-center gap-2 sm:gap-3 group"
                   >
                     <span className="text-lg sm:text-xl">{link.icon}</span>
                     {link.label}
                   </a>
                 </motion.li>
               ))}
-              <li className="text-sm sm:text-base text-gray-400 flex items-start gap-2 sm:gap-3 mt-3 sm:mt-4">
+              <li className="text-sm sm:text-base text-dark-green/80 flex items-start gap-2 sm:gap-3 mt-3 sm:mt-4">
                 <span className="text-lg sm:text-xl">📍</span>
                 <span className="text-xs sm:text-sm">
                   Kozyatağı mh. Kadıpaşa sk.<br />
@@ -149,10 +132,10 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-6 sm:pt-8">
+        <div className="border-t border-dark-green/20 pt-6 sm:pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <motion.p
-              className="text-gray-400 text-xs sm:text-sm text-center sm:text-left"
+              className="text-dark-green/70 text-xs sm:text-sm text-center sm:text-left"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -165,10 +148,10 @@ const Footer = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
             >
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/gizlilik-politikasi" className="text-dark-green/80 hover:text-terracotta transition-colors">
                 Gizlilik Politikası
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/kullanim-sartlari" className="text-dark-green/80 hover:text-terracotta transition-colors">
                 Kullanım Şartları
               </Link>
             </motion.div>
@@ -177,7 +160,7 @@ const Footer = () => {
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-pizza-red via-pizza-yellow to-pizza-green"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-dark-green"></div>
     </footer>
   );
 };

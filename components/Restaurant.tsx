@@ -5,15 +5,13 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import ImageWithLoader from "./ImageWithLoader";
 
-const restaurantImages = [
+const galleryImages = [
   "/images/DSC03960.JPG",
   "/images/DSC03961.JPG",
   "/images/DSC03963.JPG",
   "/images/DSC03965.JPG",
   "/images/DSCF0202.JPG",
   "/images/DSCF0203.JPG",
-  "/images/DSCF0204.JPG",
-  "/images/DSCF0205.JPG",
 ];
 
 const Restaurant = () => {
@@ -52,21 +50,21 @@ const Restaurant = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <span className="px-4 sm:px-6 py-2 glass rounded-full text-gray-700 font-semibold text-xs sm:text-sm">
-              RESTORAN
+              GALERİ
             </span>
           </motion.div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 px-4">
-            Şık <span className="text-gray-800">Dekorasyon</span>
+            <span className="text-gray-800">Fotoğraflarımız</span>
           </h2>
-          <div className="w-24 sm:w-32 h-1 sm:h-2 bg-gradient-to-r from-pizza-red via-pizza-yellow to-pizza-green rounded-full mx-auto mb-6 sm:mb-8"></div>
+          <div className="w-24 sm:w-32 h-1 sm:h-2 bg-dark-green rounded-full mx-auto mb-6 sm:mb-8"></div>
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto font-light px-4">
-            Mekanımızın sıcak ve modern atmosferiyle tanışın.
+            Anlarımızdan kareler.
           </p>
         </motion.div>
 
-        {/* Masonry Grid - Show only 3 */}
+        {/* 6 fotoğraf grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8 px-4">
-          {restaurantImages.slice(0, 3).map((image, index) => (
+          {galleryImages.map((image, index) => (
             <motion.div
               key={index}
               className="relative group cursor-pointer"
@@ -80,7 +78,7 @@ const Restaurant = () => {
               <div className="relative w-full h-80 rounded-3xl overflow-hidden shadow-xl">
                 <ImageWithLoader
                   src={image}
-                  alt={`Restoran Görünümü ${index + 1}`}
+                  alt={`Fotoğraf ${index + 1}`}
                   fill
                   className="object-cover transition-all duration-500 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -120,7 +118,7 @@ const Restaurant = () => {
               <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              Tüm Restoran Fotoğraflarını Gör
+              Tüm Fotoğrafları Gör
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-pizza-red-dark to-pizza-red transform translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
           </motion.a>
@@ -167,7 +165,7 @@ const Restaurant = () => {
             >
               <Image
                 src={selectedImage}
-                alt="Restoran Görünümü"
+                alt="Fotoğraf"
                 fill
                 className="object-contain"
               />
@@ -175,57 +173,6 @@ const Restaurant = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Restaurant Info Cards */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-12 sm:mt-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {[
-            {
-              icon: (
-                <svg className="w-10 h-10 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              ),
-              title: "Taze Malzemeler",
-              description: "Her gün taze olarak seçilen kaliteli malzemeler"
-            },
-            {
-              icon: (
-                <svg className="w-10 h-10 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              ),
-              title: "Aile Dostu",
-              description: "Çocuklu aileler için ideal, güvenli ve rahat ortam"
-            },
-            {
-              icon: (
-                <svg className="w-10 h-10 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              ),
-              title: "Hızlı Servis",
-              description: "Siparişlerinizi hızlı ve güvenli şekilde teslim alın"
-            }
-          ].map((feature, index) => (
-            <motion.div
-              key={index}
-              className="text-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-            >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-sm border border-gray-200">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center">
-                  {feature.icon}
-                </div>
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-gray-800">{feature.title}</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{feature.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 };
