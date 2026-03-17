@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
+import { cdnAsset } from "@/lib/cdn";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: "Mios Pizza Restoran İşletmeciliği - İtalyan Lezzetlerinin En Güzel Hali",
     description: "Taze malzemeler ve taş fırın lezzetiyle İtalyan pizzalarının en güzel hali. info@miospizza.com.tr",
     type: "website",
-    images: ['/images/pizza_mios_logo.jpg'],
+    images: [cdnAsset("images/pizza_mios_logo.jpg")],
   },
 };
 

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { cdnAsset } from "@/lib/cdn";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -40,7 +41,7 @@ const Footer = () => {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/images/pizza_mios_logo.jpg"
+                  src={cdnAsset("images/pizza_mios_logo.jpg")}
                   alt="Mios Pizza Logo"
                   width={56}
                   height={56}

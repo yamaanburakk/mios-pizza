@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { cdnAsset } from "@/lib/cdn";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -49,7 +50,7 @@ const Navbar = () => {
               className="relative"
             >
               <Image
-                src="/images/pizza_mios_logo.jpg"
+                src={cdnAsset("images/pizza_mios_logo.jpg")}
                 alt="Mios Pizza Logo"
                 width={48}
                 height={48}

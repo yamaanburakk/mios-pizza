@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { cdnAsset } from "@/lib/cdn";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -66,7 +67,7 @@ const ImageWithLoader = ({
                 }}
               >
                 <Image
-                  src="/images/pizza_mios_logo.jpg"
+                  src={cdnAsset("images/pizza_mios_logo.jpg")}
                   alt="Loading"
                   fill
                   className="object-cover"
@@ -101,6 +102,7 @@ const ImageWithLoader = ({
         sizes={sizes}
         priority={priority}
         onLoad={() => setIsLoading(false)}
+        onError={() => setIsLoading(false)}
       />
     </div>
   );

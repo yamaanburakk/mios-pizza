@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { cdnAsset } from "@/lib/cdn";
 
 interface LoadingScreenProps {
   isLoading: boolean;
@@ -100,7 +101,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
                 }}
               >
                 <Image
-                  src="/images/pizza_mios_logo.jpg"
+                  src={cdnAsset("images/pizza_mios_logo.jpg")}
                   alt="Mios Pizza"
                   fill
                   className="object-cover"

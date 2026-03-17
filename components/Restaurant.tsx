@@ -4,15 +4,16 @@ import Image from "next/image";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import ImageWithLoader from "./ImageWithLoader";
+import { cdnAsset } from "@/lib/cdn";
 
 const galleryImages = [
-  "/images/DSC03960.JPG",
-  "/images/DSC03961.JPG",
-  "/images/DSC03963.JPG",
-  "/images/DSC03965.JPG",
-  "/images/DSCF0202.JPG",
-  "/images/DSCF0203.JPG",
-];
+  "DSC03960.JPG",
+  "DSC03961.JPG",
+  "DSC03963.JPG",
+  "DSC03965.JPG",
+  "DSCF0202.JPG",
+  "DSCF0203.JPG",
+].map((f) => cdnAsset(`images/${f}`));
 
 const Restaurant = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);

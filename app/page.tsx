@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import ImageWithLoader from "@/components/ImageWithLoader";
+import { cdnAsset } from "@/lib/cdn";
 import dynamic from 'next/dynamic';
 
 // Create a separate component for the PDF viewer to isolate the react-pdf import
@@ -38,7 +39,7 @@ export default function Home() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/videos/pizza-hero.mp4" type="video/mp4" />
+            <source src={cdnAsset("videos/pizza-hero.mp4")} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80"></div>
         </div>

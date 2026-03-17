@@ -2,7 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [],
+    /** Harici CDN (jsDelivr) görselleri Next optimizasyonundan geçirme; çoklu büyük JPG’de zaman aşımı / kısmi yüklenme oluyordu */
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.jsdelivr.net',
+        pathname: '/gh/yamaanburakk/mios-pizza@master/public/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.jsdelivr.net',
+        pathname: '/gh/yamaanburakk/mios-pizza@main/public/**',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
   eslint: {

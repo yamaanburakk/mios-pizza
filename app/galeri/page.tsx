@@ -5,40 +5,41 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Link from "next/link";
 import ImageWithLoader from "@/components/ImageWithLoader";
+import { cdnAsset } from "@/lib/cdn";
 
 const pizzaImages = [
-  "/images/DSCF0136.JPG",
-  "/images/DSCF0146.JPG",
-  "/images/DSC03913.JPG",
-  "/images/DSC03880.JPG",
-  "/images/DSC03881.JPG",
-  "/images/DSC03883.JPG",
-  "/images/DSC03885.JPG",
-  "/images/DSC03886.JPG",
-  "/images/DSC03891.JPG",
-  "/images/DSC03893.JPG",
-  "/images/DSC03894.JPG",
-  "/images/DSC03897.JPG",
-  "/images/DSC03898.JPG",
-  "/images/DSC03899.JPG",
-  "/images/DSC03902.JPG",
-  "/images/DSC03903.JPG",
-  "/images/DSC03925.JPG",
-  "/images/DSC03926.JPG",
-  "/images/DSC03927.JPG",
-  "/images/DSC03928.JPG",
-];
+  "DSCF0136.JPG",
+  "DSCF0146.JPG",
+  "DSC03913.JPG",
+  "DSC03880.JPG",
+  "DSC03881.JPG",
+  "DSC03883.JPG",
+  "DSC03885.JPG",
+  "DSC03886.JPG",
+  "DSC03891.JPG",
+  "DSC03893.JPG",
+  "DSC03894.JPG",
+  "DSC03897.JPG",
+  "DSC03898.JPG",
+  "DSC03899.JPG",
+  "DSC03902.JPG",
+  "DSC03903.JPG",
+  "DSC03925.JPG",
+  "DSC03926.JPG",
+  "DSC03927.JPG",
+  "DSC03928.JPG",
+].map((f) => cdnAsset(`images/${f}`));
 
 const restaurantImages = [
-  "/images/DSC03960.JPG",
-  "/images/DSC03961.JPG",
-  "/images/DSC03963.JPG",
-  "/images/DSC03965.JPG",
-  "/images/DSCF0202.JPG",
-  "/images/DSCF0203.JPG",
-  "/images/DSCF0204.JPG",
-  "/images/DSCF0205.JPG",
-];
+  "DSC03960.JPG",
+  "DSC03961.JPG",
+  "DSC03963.JPG",
+  "DSC03965.JPG",
+  "DSCF0202.JPG",
+  "DSCF0203.JPG",
+  "DSCF0204.JPG",
+  "DSCF0205.JPG",
+].map((f) => cdnAsset(`images/${f}`));
 
 export default function GaleriPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
