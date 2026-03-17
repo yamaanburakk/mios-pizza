@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import { cdnAsset } from "@/lib/cdn";
 import dynamic from 'next/dynamic';
@@ -19,12 +19,14 @@ const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
 
 export default function Home() {
   const ref = useRef(null);
+  const menuPdfRef = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  /** Menü PDF’i sadece kaydırınca yükle — ilk açılışta ağır chunk ile yarışıp SyntaxError’a yol açmasın */
+  const menuPdfInView = useInView(menuPdfRef, {
+    once: true,
+    margin: "400px 0px",
+    amount: 0,
+  });
 
   return (
     <div className="bg-gray-50">
@@ -165,15 +167,16 @@ export default function Home() {
             <div className="w-24 sm:w-32 h-1 sm:h-2 bg-dark-green rounded-full mx-auto"></div>
           </motion.div>
 
-          {/* PDF Viewer */}
+          {/* PDF Viewer — viewport’a yaklaşınca yükle (ilk yüklemede chunk çakışması / bozuk JS hatası azalır) */}
           <motion.div
-            className="max-w-4xl mx-auto"
+            ref={menuPdfRef}
+            className="max-w-4xl mx-auto min-h-[24rem]"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {mounted && <PDFViewer />}
+            {menuPdfInView ? <PDFViewer /> : null}
           </motion.div>
         </div>
       </section>

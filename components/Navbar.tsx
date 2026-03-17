@@ -24,7 +24,6 @@ const Navbar = () => {
 
   const menuItems = [
     { href: "/anasayfa", label: "Ana Sayfa" },
-    { href: "/anasayfa#hakkimizda", label: "Hakkımızda" },
     { href: "/", label: "Menülerimiz" },
     { href: "/galeri", label: "Galeri" },
     { href: "/anasayfa#iletisim", label: "İletişim" },
