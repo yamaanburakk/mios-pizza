@@ -1,46 +1,66 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import ImageWithLoader from "./ImageWithLoader";
-import { cdnAsset } from "@/lib/cdn";
+import { ALL_FILE_IMAGE_URLS } from "@/lib/media";
 
-const pizzaImages = [
-  "DSCF0136.JPG",
-  "DSCF0146.JPG",
-  "DSC03913.JPG",
-  "DSC03879.JPG",
-  "DSC03880.JPG",
-  "DSC03881.JPG",
-  "DSC03882.JPG",
-  "DSC03883.JPG",
-  "DSC03884.JPG",
-  "DSC03885.JPG",
-  "DSC03886.JPG",
-  "DSC03890.JPG",
-  "DSC03891.JPG",
-  "DSC03892.JPG",
-  "DSC03893.JPG",
-  "DSC03894.JPG",
-  "DSC03895.JPG",
-  "DSC03897.JPG",
-  "DSC03898.JPG",
-  "DSC03899.JPG",
-  "DSC03900.JPG",
-  "DSC03902.JPG",
-  "DSC03903.JPG",
-  "DSC03925.JPG",
-  "DSC03926.JPG",
-  "DSC03927.JPG",
-  "DSC03928.JPG",
-].map((f) => cdnAsset(`images/${f}`));
+const PAGE_SIZE = 6;
+const TOTAL_IMAGES = ALL_FILE_IMAGE_URLS.length;
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const loadMoreSentinelRef = useRef<HTMLDivElement | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const visibleImages = ALL_FILE_IMAGE_URLS.slice(0, visibleCount);
+  const hasMore = visibleCount < TOTAL_IMAGES;
+
+  useEffect(() => {
+    if (!hasMore) {
+      return;
+    }
+
+    let raf = 0;
+    const loadNextIfNearViewport = () => {
+      const el = loadMoreSentinelRef.current;
+      if (!el) {
+        return;
+      }
+      const rect = el.getBoundingClientRect();
+      const preloadPx = Math.min(window.innerHeight * 0.45, 520);
+      if (rect.top > window.innerHeight + preloadPx) {
+        return;
+      }
+      setVisibleCount((c) => {
+        if (c >= TOTAL_IMAGES) {
+          return c;
+        }
+        return Math.min(c + PAGE_SIZE, TOTAL_IMAGES);
+      });
+    };
+
+    const onScrollOrResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(loadNextIfNearViewport);
+    };
+
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize, { passive: true });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(loadNextIfNearViewport);
+    });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
+    };
+  }, [hasMore]);
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
@@ -51,8 +71,7 @@ const Gallery = () => {
   };
 
   return (
-    <section id="galeri" className="py-12 bg-gradient-to-b from-gray-800 to-gray-900 text-white relative overflow-hidden">
-      {/* Background Effects */}
+    <section id="galeri" className="py-12 bg-gradient-to-b from-gray-800 to-gray-900 text-white relative overflow-x-hidden">
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-pizza-red/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pizza-yellow/10 rounded-full blur-3xl"></div>
@@ -84,84 +103,76 @@ const Gallery = () => {
           </p>
         </motion.div>
 
-        {/* Masonry Grid - Show only 3 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8 px-4">
-          {pizzaImages.slice(0, 3).map((image, index) => (
-            <motion.div
-              key={index}
-              className="relative rounded-2xl overflow-hidden cursor-pointer group"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              whileHover={{ scale: 1.02, zIndex: 10 }}
-              onClick={() => handleImageClick(image)}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  handleImageClick(image);
-                }
-              }}
-              tabIndex={0}
-              role="button"
-              aria-label={`Pizza görseli ${index + 1}`}
-            >
-              <div className="relative h-64 sm:h-72 lg:h-80">
+        <div className="px-4 mb-4">
+          <p className="text-center text-sm text-gray-400" aria-live="polite">
+            {visibleCount} / {TOTAL_IMAGES} görsel
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8 px-4">
+          {visibleImages.map((image, index) => {
+            const fileNo = index + 3;
+            return (
+              <motion.div
+                key={image}
+                className="relative rounded-2xl overflow-hidden cursor-pointer group aspect-[4/3]"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: Math.min(index * 0.02, 0.35) }}
+                whileHover={{ scale: 1.02, zIndex: 10 }}
+                onClick={() => handleImageClick(image)}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    handleImageClick(image);
+                  }
+                }}
+                tabIndex={0}
+                role="button"
+                aria-label={`Galeri görseli File ${fileNo} — büyütmek için tıklayın`}
+              >
                 <ImageWithLoader
                   src={image}
-                  alt={`Pizza ${index + 1}`}
+                  alt={`Mio's Pizza galeri File ${fileNo}`}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes="(max-width: 768px) 50vw, 33vw"
                 />
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                {/* Hover Content */}
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
                 <AnimatePresence>
                   {hoveredIndex === index && (
                     <motion.div
-                      className="absolute inset-0 flex items-end justify-center p-4 sm:p-6"
-                      initial={{ opacity: 0, y: 20 }}
+                      className="absolute inset-0 flex items-end justify-center p-3 sm:p-4"
+                      initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 20 }}
+                      exit={{ opacity: 0, y: 16 }}
                     >
-                      <div className="text-center">
-                        <motion.div
-                          className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-3 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center"
-                          whileHover={{ scale: 1.2, rotate: 90 }}
-                        >
-                          <svg
-                            className="w-6 h-6 sm:w-8 sm:h-8 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"
-                            />
-                          </svg>
-                        </motion.div>
-                        <p className="text-white font-semibold text-sm sm:text-base lg:text-lg">Büyütmek için tıklayın</p>
-                      </div>
+                      <p className="text-white font-semibold text-xs sm:text-sm">Büyütmek için tıklayın</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                {/* Corner Badge */}
-                <div className="absolute top-4 right-4 glass rounded-full px-4 py-2 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-                  #{index + 1}
+                <div className="absolute top-2 right-2 glass rounded-full px-2 py-1 text-[10px] sm:text-xs font-bold opacity-90">
+                  File {fileNo}
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* View All Button */}
+        {hasMore && (
+          <div
+            ref={loadMoreSentinelRef}
+            className="flex min-h-[4rem] items-center justify-center px-4 py-6"
+            aria-hidden="true"
+          >
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/20 border-t-pizza-red" />
+          </div>
+        )}
+
         <motion.div
           className="text-center py-12 sm:py-16 px-4"
           initial={{ opacity: 0, y: 30 }}
@@ -185,7 +196,6 @@ const Gallery = () => {
         </motion.div>
       </div>
 
-      {/* Enhanced Modal */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
@@ -214,7 +224,7 @@ const Gallery = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </motion.button>
-            
+
             <motion.div
               className="relative w-full max-w-6xl h-[85vh] rounded-3xl overflow-hidden shadow-2xl"
               initial={{ scale: 0.8, opacity: 0 }}
@@ -225,7 +235,7 @@ const Gallery = () => {
             >
               <Image
                 src={selectedImage}
-                alt="Pizza"
+                alt="Galeri"
                 fill
                 className="object-contain"
               />

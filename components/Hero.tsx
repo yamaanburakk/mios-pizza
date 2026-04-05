@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { cdnAsset } from "@/lib/cdn";
 import { useEffect, useState } from "react";
+import { useHeroVideoSrc } from "@/hooks/useHeroVideo";
+import { whatsappOrderHref } from "@/lib/whatsapp";
 
 const Hero = () => {
+  const videoSrc = useHeroVideoSrc();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -23,13 +25,14 @@ const Hero = () => {
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
+          key={videoSrc}
           autoPlay
           muted
           loop
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src={cdnAsset("videos/pizza-hero.mp4")} type="video/mp4" />
+          <source src={videoSrc} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80"></div>
       </div>
@@ -120,7 +123,7 @@ const Hero = () => {
           </motion.a>
 
           <motion.a
-            href="https://wa.me/905313455800"
+            href={whatsappOrderHref}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, y: -5 }}

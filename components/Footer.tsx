@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cdnAsset } from "@/lib/cdn";
+import { whatsappOrderHref } from "@/lib/whatsapp";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -11,7 +12,7 @@ const Footer = () => {
   const footerLinks = {
     iletisim: [
       { label: "0216 999 50 57", href: "tel:02169995057", icon: "📞" },
-      { label: "0531 345 58 00", href: "https://wa.me/905313455800", icon: "💬" },
+      { label: "0216 999 50 57", href: whatsappOrderHref, icon: "💬" },
       { label: "@pizzamios", href: "https://instagram.com/pizzamios", icon: "📱" },
       { label: "info@miospizza.com.tr", href: "mailto:info@miospizza.com.tr", icon: "✉️" },
     ],
@@ -71,7 +72,7 @@ const Footer = () => {
                 </svg>
               </motion.a>
               <motion.a
-                href="https://wa.me/905313455800"
+                href={whatsappOrderHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-whatsapp to-whatsapp-dark rounded-lg sm:rounded-xl flex items-center justify-center hover:scale-110 transition-transform shadow-lg text-white"

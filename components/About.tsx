@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import ImageWithLoader from "./ImageWithLoader";
-import { cdnAsset } from "@/lib/cdn";
+import { fileImageUrl } from "@/lib/media";
 
 const features = [
   {
@@ -75,7 +75,7 @@ const About = () => {
           >
             <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl group">
               <ImageWithLoader
-                src={cdnAsset("images/DSC03925.JPG")}
+                src={fileImageUrl(42)}
                 alt="Pizza yapım süreci"
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-700"

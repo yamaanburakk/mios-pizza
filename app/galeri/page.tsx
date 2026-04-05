@@ -5,53 +5,15 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Link from "next/link";
 import ImageWithLoader from "@/components/ImageWithLoader";
-import { cdnAsset } from "@/lib/cdn";
-
-const pizzaImages = [
-  "DSCF0136.JPG",
-  "DSCF0146.JPG",
-  "DSC03913.JPG",
-  "DSC03880.JPG",
-  "DSC03881.JPG",
-  "DSC03883.JPG",
-  "DSC03885.JPG",
-  "DSC03886.JPG",
-  "DSC03891.JPG",
-  "DSC03893.JPG",
-  "DSC03894.JPG",
-  "DSC03897.JPG",
-  "DSC03898.JPG",
-  "DSC03899.JPG",
-  "DSC03902.JPG",
-  "DSC03903.JPG",
-  "DSC03925.JPG",
-  "DSC03926.JPG",
-  "DSC03927.JPG",
-  "DSC03928.JPG",
-].map((f) => cdnAsset(`images/${f}`));
-
-const restaurantImages = [
-  "DSC03960.JPG",
-  "DSC03961.JPG",
-  "DSC03963.JPG",
-  "DSC03965.JPG",
-  "DSCF0202.JPG",
-  "DSCF0203.JPG",
-  "DSCF0204.JPG",
-  "DSCF0205.JPG",
-].map((f) => cdnAsset(`images/${f}`));
+import { ALL_FILE_IMAGE_URLS } from "@/lib/media";
 
 export default function GaleriPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"pizzalar" | "restoran">("pizzalar");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const currentImages = activeTab === "pizzalar" ? pizzaImages : restaurantImages;
-
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
         <div className="container mx-auto px-4">
           <motion.div
@@ -74,11 +36,7 @@ export default function GaleriPage() {
               Fotoğraf <span className="text-white">Galerisi</span>
             </h1>
             <div className="w-32 h-2 bg-dark-green rounded-full mx-auto mb-8"></div>
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-light mb-8">
-              Lezzetlerimiz ve mekanımızdan özel kareler
-            </p>
-            
-            {/* Back Button */}
+
             <Link href="/#galeri">
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -95,81 +53,47 @@ export default function GaleriPage() {
         </div>
       </section>
 
-      {/* Gallery Section */}
       <section className="py-20" ref={ref}>
         <div className="container mx-auto px-4">
-          {/* Tabs */}
-          <div className="flex justify-center gap-4 mb-16">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveTab("pizzalar")}
-              className={`px-8 py-4 rounded-full font-semibold text-lg transition-all ${
-                activeTab === "pizzalar"
-                  ? "bg-gradient-to-r from-pizza-yellow to-pizza-red text-white shadow-lg"
-                  : "bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200"
-              }`}
-            >
-              🍕 Lezzetlerimiz ({pizzaImages.length})
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveTab("restoran")}
-              className={`px-8 py-4 rounded-full font-semibold text-lg transition-all ${
-                activeTab === "restoran"
-                  ? "bg-gradient-to-r from-pizza-red to-pizza-green text-white shadow-lg"
-                  : "bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200"
-              }`}
-            >
-              🏪 Restoranımız ({restaurantImages.length})
-            </motion.button>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {ALL_FILE_IMAGE_URLS.map((image, index) => {
+              const fileNo = index + 3;
+              return (
+                <motion.div
+                  key={image}
+                  className="relative rounded-2xl overflow-hidden cursor-pointer group h-56 sm:h-64"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.35, delay: Math.min(index * 0.015, 0.45) }}
+                  whileHover={{ y: -6 }}
+                  onClick={() => setSelectedImage(image)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      setSelectedImage(image);
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`File ${fileNo} — büyütmek için tıklayın`}
+                >
+                  <ImageWithLoader
+                    src={image}
+                    alt={`File ${fileNo}`}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  <span className="absolute bottom-2 right-2 rounded-full bg-black/50 px-2 py-0.5 text-xs text-white">
+                    File {fileNo}
+                  </span>
+                </motion.div>
+              );
+            })}
           </div>
-
-          {/* Images Grid */}
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-          >
-            {currentImages.map((image, index) => (
-              <motion.div
-                key={index}
-                className="relative rounded-2xl overflow-hidden cursor-pointer group h-64"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                whileHover={{ y: -10 }}
-                onClick={() => setSelectedImage(image)}
-              >
-                <ImageWithLoader
-                  src={image}
-                  alt={`${activeTab === "pizzalar" ? "Pizza" : "Restoran"} ${index + 1}`}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                {/* Overlay */}
-                <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 flex items-center justify-between">
-                    <p className="text-gray-800 font-semibold text-sm">
-                      {activeTab === "pizzalar" ? "Pizza" : "Restoran"} #{index + 1}
-                    </p>
-                    <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                    </svg>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </section>
 
-      {/* Modal */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
@@ -177,12 +101,23 @@ export default function GaleriPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedImage(null)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                setSelectedImage(null);
+              }
+            }}
             className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4 cursor-pointer"
+            role="dialog"
+            aria-modal="true"
+            tabIndex={-1}
           >
             <motion.button
+              type="button"
               className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
               whileHover={{ scale: 1.1, rotate: 90 }}
               whileTap={{ scale: 0.9 }}
+              onClick={() => setSelectedImage(null)}
+              aria-label="Kapat"
             >
               <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -199,7 +134,7 @@ export default function GaleriPage() {
             >
               <Image
                 src={selectedImage}
-                alt="Pizza"
+                alt="Galeri"
                 fill
                 className="object-contain rounded-2xl"
               />
@@ -210,4 +145,3 @@ export default function GaleriPage() {
     </main>
   );
 }
-

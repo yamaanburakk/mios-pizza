@@ -1,11 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import ImageWithLoader from "@/components/ImageWithLoader";
-import { cdnAsset } from "@/lib/cdn";
 import dynamic from 'next/dynamic';
+import { useHeroVideoSrc } from "@/hooks/useHeroVideo";
+import { whatsappOrderHref } from "@/lib/whatsapp";
+import Gallery from "@/components/Gallery";
+import { BranchAnnouncementModal } from "@/components/BranchAnnouncementModal";
 
 // Create a separate component for the PDF viewer to isolate the react-pdf import
 const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
@@ -18,9 +19,8 @@ const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
 });
 
 export default function Home() {
-  const ref = useRef(null);
+  const heroVideoSrc = useHeroVideoSrc();
   const menuPdfRef = useRef(null);
-  const isInView = useInView(ref, { once: true });
   /** Menü PDF’i sadece kaydırınca yükle — ilk açılışta ağır chunk ile yarışıp SyntaxError’a yol açmasın */
   const menuPdfInView = useInView(menuPdfRef, {
     once: true,
@@ -30,18 +30,20 @@ export default function Home() {
 
   return (
     <div className="bg-gray-50">
+      <BranchAnnouncementModal />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black pt-16 sm:pt-20">
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
           <video
+            key={heroVideoSrc}
             autoPlay
             muted
             loop
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src={cdnAsset("videos/pizza-hero.mp4")} type="video/mp4" />
+            <source src={heroVideoSrc} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80"></div>
         </div>
@@ -181,6 +183,7 @@ export default function Home() {
         </div>
       </section>
 
+      <Gallery />
 
       {/* Call to Action */}
       <section className="py-16 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
@@ -225,7 +228,7 @@ export default function Home() {
                     </motion.a>
 
                     <motion.a
-                      href="https://wa.me/905313455800"
+                      href={whatsappOrderHref}
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05, y: -2 }}

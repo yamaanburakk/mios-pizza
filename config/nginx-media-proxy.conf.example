@@ -1,0 +1,15 @@
+# Sadece reverse proxy bloğu — mevcut server {} içine yapıştırın.
+# Üretim build’de uygulama otomatik /media-proxy kullanır (lib/media.ts).
+
+location /media-proxy/ {
+  proxy_http_version 1.1;
+  proxy_pass http://72.60.17.107:9000/miospizza/;
+  proxy_set_header Host 72.60.17.107:9000;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto $scheme;
+  proxy_buffering off;
+  proxy_request_buffering off;
+  add_header Access-Control-Allow-Origin "*" always;
+  add_header Access-Control-Allow-Methods "GET, HEAD, OPTIONS" always;
+}

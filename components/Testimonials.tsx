@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import ImageWithLoader from "./ImageWithLoader";
-import { cdnAsset } from "@/lib/cdn";
+import { fileImageUrl } from "@/lib/media";
 
 const testimonials = [
   {
@@ -13,7 +13,7 @@ const testimonials = [
     comment: "Malzemelerin tazeliği gerçekten müthiş! Her lokmada İtalya'yı hissediyorsunuz. Özellikle fıstıklı buratta pizzaları harika. Kadıköy'ün en iyi pizzası.",
     rating: 5,
     date: "2 hafta önce",
-    image: cdnAsset("images/DSC03879.JPG"),
+    image: fileImageUrl(10),
   },
   {
     name: "Mehmet Kaya",
@@ -21,7 +21,7 @@ const testimonials = [
     comment: "Fiyat-performans açısından İstanbul'un en uygun yerlerinden biri. Hem lezzet hem kalite hem de fiyat mükemmel dengede. Taze malzemeler, bol malzemeli pizzalar.",
     rating: 5,
     date: "1 ay önce",
-    image: cdnAsset("images/DSC03882.JPG"),
+    image: fileImageUrl(18),
   },
   {
     name: "Sarah Miller",
@@ -29,7 +29,7 @@ const testimonials = [
     comment: "Authentic Italian taste in the heart of Istanbul! The ingredients are so fresh and the dough is perfect. Best pizza I've had outside of Italy. Highly recommend!",
     rating: 5,
     date: "3 weeks ago",
-    image: cdnAsset("images/DSC03885.JPG"),
+    image: fileImageUrl(26),
   },
   {
     name: "Zeynep Demir",
@@ -37,7 +37,7 @@ const testimonials = [
     comment: "Taş fırında pişen pizzaların o eşsiz aroması... Doğal malzemeler, katkısız lezzetler. Çalışanlar çok ilgili ve profesyonel. Kesinlikle tavsiye ediyorum!",
     rating: 5,
     date: "3 gün önce",
-    image: cdnAsset("images/DSC03890.JPG"),
+    image: fileImageUrl(34),
   },
   {
     name: "Marco Rossi",
@@ -45,7 +45,7 @@ const testimonials = [
     comment: "As an Italian, I can say this is real Neapolitan pizza! The quality of ingredients and the traditional preparation method are impressive. Complimenti!",
     rating: 5,
     date: "2 weeks ago",
-    image: cdnAsset("images/DSC03895.JPG"),
+    image: fileImageUrl(52),
   },
   {
     name: "Can Öztürk",
@@ -53,7 +53,7 @@ const testimonials = [
     comment: "Hem ailemle hem arkadaşlarımla sürekli geldiğimiz bir yer. Pizzaların yanı sıra samimi ortam ve güler yüzlü hizmet de artıları. Fiyatlar gayet makul.",
     rating: 5,
     date: "5 gün önce",
-    image: cdnAsset("images/DSC03900.JPG"),
+    image: fileImageUrl(66),
   },
 ];
 

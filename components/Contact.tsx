@@ -2,6 +2,8 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { whatsappOrderHref } from "@/lib/whatsapp";
+import { LocationTabs } from "@/components/LocationTabs";
 import { getContactIcon } from "./ContactIcons";
 
 const contactMethods: Array<{
@@ -25,8 +27,8 @@ const contactMethods: Array<{
   {
     icon: "whatsapp",
     title: "WhatsApp",
-    value: "0531 345 58 00",
-    href: "https://wa.me/905313455800",
+    value: "0216 999 50 57",
+    href: whatsappOrderHref,
     color: "from-whatsapp to-whatsapp-dark",
     description: "Hızlı mesajlaşma",
   },
@@ -37,15 +39,6 @@ const contactMethods: Array<{
     href: "https://instagram.com/pizzamios",
     color: "from-instagram to-instagram-dark",
     description: "Bizi takip edin",
-  },
-  {
-    icon: "maps",
-    title: "Adres",
-    value: "Kozyatağı Mahallesi, Kadıpaşa Sokak",
-    subtitle: "No:28/C Kadıköy, İstanbul",
-    color: "from-blue-500 to-blue-600",
-    iconBg: "from-white to-white",
-    description: "Bizi ziyaret edin",
   },
 ];
 
@@ -134,134 +127,55 @@ const Contact = () => {
 
             {/* Diğer İletişim Kartları */}
             {contactMethods.map((method, index) => (
-              method.href ? (
-                <motion.a
-                  key={index}
-                  href={method.href}
-                  target={method.href.startsWith("http") ? "_blank" : undefined}
-                  rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="block group"
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ x: 10 }}
-                >
-                  <div className="relative bg-white rounded-2xl lg:rounded-3xl p-6 sm:p-8 shadow-lg border border-gray-100">
-                    
-                    <div className="relative flex items-center gap-4 sm:gap-6">
-                      <motion.div
-                        className={`w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br ${method.iconBg || method.color} rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl flex-shrink-0`}
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <div className="w-8 h-8 sm:w-10 sm:h-10">
-                          {getContactIcon(method.icon)}
-                        </div>
-                      </motion.div>
-                      <div className="flex-1">
-                        <div className="text-xs sm:text-sm text-gray-500 mb-1 sm:mb-2">{method.description}</div>
-                        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">
-                          {method.title}
-                        </h3>
-                        <p className={`text-base sm:text-lg lg:text-xl font-semibold bg-gradient-to-r ${method.color} bg-clip-text text-transparent`}>
-                          {method.value}
-                        </p>
-                        {method.subtitle && (
-                          <p className="text-sm sm:text-base text-gray-600 mt-1">{method.subtitle}</p>
-                        )}
-                      </div>
-                      <svg
-                        className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </div>
-                </motion.a>
-              ) : (
-                <motion.div
-                  key={index}
-                  className="block group"
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                >
-                  <div className="relative bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
-                    
-                    <div className="relative flex items-center gap-6">
-                      <motion.div
-                        className={`w-20 h-20 bg-gradient-to-br ${method.iconBg || method.color} rounded-2xl flex items-center justify-center shadow-xl flex-shrink-0`}
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6 }}
-                      >
+              <motion.a
+                key={index}
+                href={method.href}
+                target={method.href?.startsWith("http") ? "_blank" : undefined}
+                rel={method.href?.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="block group"
+                initial={{ opacity: 0, x: -50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                whileHover={{ x: 10 }}
+              >
+                <div className="relative bg-white rounded-2xl lg:rounded-3xl p-6 sm:p-8 shadow-lg border border-gray-100">
+                  <div className="relative flex items-center gap-4 sm:gap-6">
+                    <motion.div
+                      className={`w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br ${method.iconBg || method.color} rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl flex-shrink-0`}
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <div className="w-8 h-8 sm:w-10 sm:h-10">
                         {getContactIcon(method.icon)}
-                      </motion.div>
-                      <div className="flex-1">
-                        <div className="text-sm text-gray-500 mb-2">{method.description}</div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                          {method.title}
-                        </h3>
-                        <p className={`text-xl font-semibold bg-gradient-to-r ${method.color} bg-clip-text text-transparent`}>
-                          {method.value}
-                        </p>
-                        {method.subtitle && (
-                          <p className="text-gray-600 mt-1">{method.subtitle}</p>
-                        )}
                       </div>
+                    </motion.div>
+                    <div className="flex-1">
+                      <div className="text-xs sm:text-sm text-gray-500 mb-1 sm:mb-2">{method.description}</div>
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">
+                        {method.title}
+                      </h3>
+                      <p className={`text-base sm:text-lg lg:text-xl font-semibold bg-gradient-to-r ${method.color} bg-clip-text text-transparent`}>
+                        {method.value}
+                      </p>
+                      {method.subtitle && (
+                        <p className="text-sm sm:text-base text-gray-600 mt-1">{method.subtitle}</p>
+                      )}
                     </div>
+                    <svg
+                      className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
-                </motion.div>
-              )
+                </div>
+              </motion.a>
             ))}
           </div>
 
-          {/* Map */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <div className="sticky top-12 sm:top-24 bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-6 shadow-2xl border border-gray-100">
-              <div className="aspect-[2/1] sm:aspect-[2/1] rounded-xl sm:rounded-2xl overflow-hidden">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.2!2d29.0752!3d40.9829!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac86b3b3b3b3b%3A0x0!2zS296eWF0YcSfxLEgTWFoYWxsZXNpLCBLYWTEsXBhxZ9hIFNrLiBObzoyOC9DLCAzNDc0MiBLYWTEsWvDtnkvxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1697000000000!5m2!1str!2str"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Mios Pizza Konum"
-                  className="grayscale hover:grayscale-0 transition-all duration-500"
-                ></iframe>
-              </div>
-              <div className="mt-4 sm:mt-6 text-center">
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Bizi Ziyaret Edin</h3>
-                <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
-                  Kozyatağı Mahallesi, Kadıpaşa Sokak<br />
-                  No:28/C Kadıköy, İstanbul
-                </p>
-                <motion.a
-                  href="https://maps.google.com/?q=Kozyatağı+Mahallesi+Kadıpaşa+Sokak+No:28/C+Kadıköy+İstanbul"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-pizza-red to-pizza-red-dark text-white rounded-full font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  Yol Tarifi Al
-                </motion.a>
-              </div>
-            </div>
-          </motion.div>
+          <LocationTabs isInView={isInView} />
         </div>
 
         {/* Call to Action */}
@@ -306,7 +220,7 @@ const Contact = () => {
                   </motion.a>
                   
                   <motion.a
-                    href="https://wa.me/905313455800"
+                    href={whatsappOrderHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05, y: -2 }}
