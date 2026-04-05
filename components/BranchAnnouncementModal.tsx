@@ -151,16 +151,6 @@ export const BranchAnnouncementModal = () => {
                   {ADDRESS_CADDEBOSTAN}
                 </address>
               </div>
-
-              <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-                <button
-                  type="button"
-                  onClick={handleClose}
-                  className="inline-flex w-full items-center justify-center rounded-xl bg-terracotta px-5 py-3 text-sm font-semibold text-cream shadow-lg shadow-terracotta/25 transition-colors hover:bg-terracotta-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-cream sm:w-auto"
-                >
-                  Anladım
-                </button>
-              </div>
             </div>
           </motion.div>
         </div>

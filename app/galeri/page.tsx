@@ -56,9 +56,7 @@ export default function GaleriPage() {
       <section className="py-20" ref={ref}>
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {ALL_FILE_IMAGE_URLS.map((image, index) => {
-              const fileNo = index + 3;
-              return (
+            {ALL_FILE_IMAGE_URLS.map((image, index) => (
                 <motion.div
                   key={image}
                   className="relative rounded-2xl overflow-hidden cursor-pointer group h-56 sm:h-64"
@@ -74,22 +72,18 @@ export default function GaleriPage() {
                   }}
                   tabIndex={0}
                   role="button"
-                  aria-label={`File ${fileNo} — büyütmek için tıklayın`}
+                  aria-label="Galeri görseli — büyütmek için tıklayın"
                 >
                   <ImageWithLoader
                     src={image}
-                    alt={`File ${fileNo}`}
+                    alt="Mio's Pizza galeri fotoğrafı"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                  <span className="absolute bottom-2 right-2 rounded-full bg-black/50 px-2 py-0.5 text-xs text-white">
-                    File {fileNo}
-                  </span>
                 </motion.div>
-              );
-            })}
+            ))}
           </div>
         </div>
       </section>
