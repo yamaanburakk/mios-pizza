@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Document, Page, pdfjs } from 'react-pdf';
+import { MENU_PDF_FILE_URL } from '@/lib/menu-pdf';
 
 // PDF.js worker'ı ayarlayın
 if (typeof window !== 'undefined') {
@@ -52,7 +53,7 @@ export default function PDFViewer() {
           <div className="bg-transparent rounded-xl overflow-hidden">
             <div className="relative flex items-center justify-center">
               <Document
-                file="/MENU.pdf"
+                file={MENU_PDF_FILE_URL}
                 onLoadSuccess={onDocumentLoadSuccess}
                 loading={null}
                 error={

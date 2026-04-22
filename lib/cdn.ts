@@ -9,7 +9,7 @@ export const CDN_PUBLIC_BASE = `https://cdn.jsdelivr.net/gh/yamaanburakk/mios-pi
 
 /**
  * public/ altındaki dosya yolu (başında / olmadan).
- * @example cdnAsset('images/DSC03879.JPG')
+ * @example cdnAsset('images/pizza_mios_logo.jpg')
  * @example cdnAsset('videos/pizza-hero.mp4')
  */
 export const cdnAsset = (relativePublicPath: string): string => {
