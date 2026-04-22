@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Link from "next/link";
 import ImageWithLoader from "@/components/ImageWithLoader";
-import { ALL_FILE_IMAGE_URLS } from "@/lib/media";
+import { GALLERY_IMAGE_URLS } from "@/lib/media";
 
 export default function GaleriPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -56,7 +56,7 @@ export default function GaleriPage() {
       <section className="py-20" ref={ref}>
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {ALL_FILE_IMAGE_URLS.map((image, index) => (
+            {GALLERY_IMAGE_URLS.map((image, index) => (
                 <motion.div
                   key={image}
                   className="relative rounded-2xl overflow-hidden cursor-pointer group h-56 sm:h-64"

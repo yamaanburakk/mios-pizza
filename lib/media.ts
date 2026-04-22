@@ -21,7 +21,7 @@ export const mediaObjectUrl = (objectKey: string): string => {
   return `${MEDIA_BASE}/${path}`;
 };
 
-/** `File 3.jpg` … `File 114.jpg` aralığı */
+/** `fileImageUrl` için kısıtlama (tekil görseller: About, Testimonials vb.) */
 export const FILE_IMAGE_MIN = 3 as const;
 export const FILE_IMAGE_MAX = 114 as const;
 
@@ -30,10 +30,13 @@ export const fileImageUrl = (fileNumber: number): string => {
   return mediaObjectUrl(`File ${n}.jpg`);
 };
 
-/** File 3–114 tüm görseller (sıra sabit) */
-export const ALL_FILE_IMAGE_URLS: readonly string[] = Array.from(
-  { length: FILE_IMAGE_MAX - FILE_IMAGE_MIN + 1 },
-  (_, i) => fileImageUrl(i + FILE_IMAGE_MIN)
+/** Ana sayfa + /galeri grid’inde gösterilen görseller (sıra sabit) */
+export const GALLERY_FILE_NUMBERS = [
+  6, 12, 17, 23, 32, 38, 41, 44, 60, 68, 86, 90, 95, 102, 104,
+] as const;
+
+export const GALLERY_IMAGE_URLS: readonly string[] = GALLERY_FILE_NUMBERS.map((n) =>
+  fileImageUrl(n)
 );
 
 /** Hero arka plan videoları (MinIO) */

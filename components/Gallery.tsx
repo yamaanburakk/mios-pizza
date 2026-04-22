@@ -1,50 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import ImageWithLoader from "./ImageWithLoader";
-import { ALL_FILE_IMAGE_URLS } from "@/lib/media";
-
-const BATCH_SIZE = 12;
-const TOTAL_IMAGES = ALL_FILE_IMAGE_URLS.length;
-const INITIAL_COUNT = Math.min(BATCH_SIZE, TOTAL_IMAGES);
+import { GALLERY_IMAGE_URLS } from "@/lib/media";
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
-  const loadMoreSentinelRef = useRef<HTMLDivElement | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const visibleImages = ALL_FILE_IMAGE_URLS.slice(0, visibleCount);
-  const hasMore = visibleCount < TOTAL_IMAGES;
-
-  const loadMore = useCallback(() => {
-    setVisibleCount((c) => {
-      if (c >= TOTAL_IMAGES) return c;
-      return Math.min(c + BATCH_SIZE, TOTAL_IMAGES);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!hasMore) return;
-    const el = loadMoreSentinelRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (!entry?.isIntersecting) return;
-        loadMore();
-      },
-      { root: null, rootMargin: "320px 0px", threshold: 0 },
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [hasMore, loadMore, visibleCount]);
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
@@ -88,64 +54,52 @@ const Gallery = () => {
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8 px-4">
-          {visibleImages.map((image, index) => {
-            return (
-              <motion.div
-                key={image}
-                className="relative rounded-2xl overflow-hidden cursor-pointer group aspect-[4/3]"
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.25, delay: Math.min(index * 0.015, 0.2) }}
-                whileHover={{ scale: 1.02, zIndex: 10 }}
-                onClick={() => handleImageClick(image)}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    handleImageClick(image);
-                  }
-                }}
-                tabIndex={0}
-                role="button"
-                aria-label="Galeri görseli — büyütmek için tıklayın"
-              >
-                <ImageWithLoader
-                  src={image}
-                  alt="Mio's Pizza galeri fotoğrafı"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  priority={index < 6}
-                />
+          {GALLERY_IMAGE_URLS.map((image, index) => (
+            <motion.div
+              key={image}
+              className="relative rounded-2xl overflow-hidden cursor-pointer group aspect-[4/3]"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.25, delay: Math.min(index * 0.015, 0.2) }}
+              whileHover={{ scale: 1.02, zIndex: 10 }}
+              onClick={() => handleImageClick(image)}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  handleImageClick(image);
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label="Galeri görseli — büyütmek için tıklayın"
+            >
+              <ImageWithLoader
+                src={image}
+                alt="Mio's Pizza galeri fotoğrafı"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                sizes="(max-width: 768px) 50vw, 33vw"
+                priority={index < 6}
+              />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <AnimatePresence>
-                  {hoveredIndex === index && (
-                    <motion.div
-                      className="absolute inset-0 flex items-end justify-center p-3 sm:p-4"
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 16 }}
-                    >
-                      <p className="text-white font-semibold text-xs sm:text-sm">Büyütmek için tıklayın</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
+              <AnimatePresence>
+                {hoveredIndex === index && (
+                  <motion.div
+                    className="absolute inset-0 flex items-end justify-center p-3 sm:p-4"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 16 }}
+                  >
+                    <p className="text-white font-semibold text-xs sm:text-sm">Büyütmek için tıklayın</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
         </div>
-
-        {hasMore && (
-          <div
-            ref={loadMoreSentinelRef}
-            className="flex min-h-[3rem] items-center justify-center px-4 py-4"
-            aria-hidden="true"
-          >
-            <div className="h-7 w-7 animate-spin rounded-full border-2 border-white/20 border-t-pizza-red" />
-          </div>
-        )}
       </div>
 
       <AnimatePresence>
