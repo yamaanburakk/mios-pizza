@@ -35,7 +35,7 @@ const sections = [
   {
     title: "Şikayet ve İletişim",
     content:
-      "Şikayet ve önerilerinizi info@miospizza.com.tr veya 0216 999 50 57 / 0531 345 58 00 numaraları üzerinden iletebilirsiniz. Müşteri memnuniyeti önceliğimizdir; talepleriniz en kısa sürede değerlendirilir.",
+      "Şikayet ve önerilerinizi info@miospizza.com.tr veya şube telefonlarımız üzerinden iletebilirsiniz: Kozyatağı 0216 999 50 57 ve 0531 345 58 00; Erenköy 0216 759 54 34 ve 0533 558 54 34. Müşteri memnuniyeti önceliğimizdir; talepleriniz en kısa sürede değerlendirilir.",
   },
   {
     title: "Sorumluluk Sınırı",

@@ -75,10 +75,10 @@ npm start
 
 ## 📱 İletişim Bilgileri
 
-- **Telefon**: 0216 999 50 57
-- **WhatsApp**: 0531 345 58 00
+- **Kozyatağı**: 0216 999 50 57 · 0531 345 58 00 (WhatsApp)
+- **Erenköy**: 0216 759 54 34 · 0533 558 54 34 (WhatsApp)
 - **Instagram**: [@pizzamios](https://instagram.com/pizzamios)
-- **Adres**: Kozyatağı mh. Kadıpaşa sk. No:28/C Kadıköy, İstanbul
+- **Adres (Kozyatağı)**: Kozyatağı mh. Kadıpaşa sk. No:28/C Kadıköy, İstanbul
 
 ## 🎯 Özellikler Detay
 

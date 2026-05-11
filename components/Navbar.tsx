@@ -5,6 +5,27 @@ import { cdnAsset } from "@/lib/cdn";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { QR_MENU_URL } from "@/lib/qrmenu";
+
+type NavItem = {
+  label: string;
+  href: string;
+  external?: boolean;
+};
+
+const menuItems: NavItem[] = [
+  { href: "/", label: "Ana Sayfa" },
+  { href: QR_MENU_URL, label: "Menü", external: true },
+  { href: "/galeri", label: "Galeri" },
+  { href: "/#iletisim", label: "İletişim" },
+];
+
+const navLinkClassDesktop = (scrolled: boolean) =>
+  `px-4 py-2 rounded-xl font-medium transition-all relative group ${
+    scrolled
+      ? "text-white hover:text-pizza-yellow"
+      : "text-white hover:text-pizza-yellow drop-shadow-lg"
+  }`;
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,26 +43,20 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const menuItems = [
-    { href: "/anasayfa", label: "Ana Sayfa" },
-    { href: "/", label: "Menü" },
-    { href: "/galeri", label: "Galeri" },
-    { href: "/anasayfa#iletisim", label: "İletişim" },
-  ];
+  const handleMobileNavClick = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "glass-dark shadow-2xl py-4"
-          : "bg-transparent py-6"
+        scrolled ? "glass-dark shadow-2xl py-4" : "bg-transparent py-6"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group">
             <motion.div
               whileHover={{ scale: 1.1 }}
@@ -59,35 +74,42 @@ const Navbar = () => {
             </motion.div>
           </Link>
 
-          {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-1">
             {menuItems.map((item, index) => (
               <motion.div
-                key={item.href}
+                key={`${item.label}-${item.href}`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Link
-                  href={item.href}
-                  className={`px-4 py-2 rounded-xl font-medium transition-all relative group ${
-                    scrolled ? 'text-white hover:text-pizza-yellow' : 'text-white hover:text-pizza-yellow drop-shadow-lg'
-                  }`}
-                >
-                  {item.label}
-                  <span className="absolute inset-0 bg-white/10 rounded-xl scale-0 group-hover:scale-100 transition-transform"></span>
-                </Link>
+                {item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${navLinkClassDesktop(scrolled)} relative group inline-block`}
+                  >
+                    {item.label}
+                    <span className="absolute inset-0 bg-white/10 rounded-xl scale-0 group-hover:scale-100 transition-transform"></span>
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className={`${navLinkClassDesktop(scrolled)} relative group`}
+                  >
+                    {item.label}
+                    <span className="absolute inset-0 bg-white/10 rounded-xl scale-0 group-hover:scale-100 transition-transform"></span>
+                  </Link>
+                )}
               </motion.div>
             ))}
-            
           </div>
 
-          {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={handleToggleMenu}
             className={`lg:hidden p-2 rounded-xl transition-colors ${
-              scrolled ? 'text-white' : 'text-white'
+              scrolled ? "text-white" : "text-white"
             }`}
             aria-label="Menü"
           >
@@ -116,7 +138,6 @@ const Navbar = () => {
           </motion.button>
         </div>
 
-        {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -128,18 +149,30 @@ const Navbar = () => {
               <div className="flex flex-col p-4 space-y-2">
                 {menuItems.map((item, index) => (
                   <motion.div
-                    key={item.href}
+                    key={`${item.label}-${item.href}-m`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <Link
-                      href={item.href}
-                      className="block px-4 py-3 text-white hover:bg-white/10 rounded-xl transition-colors font-medium"
-                      onClick={handleToggleMenu}
-                    >
-                      {item.label}
-                    </Link>
+                    {item.external ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-4 py-3 text-white hover:bg-white/10 rounded-xl transition-colors font-medium"
+                        onClick={handleMobileNavClick}
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className="block px-4 py-3 text-white hover:bg-white/10 rounded-xl transition-colors font-medium"
+                        onClick={handleMobileNavClick}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </motion.div>
                 ))}
               </div>

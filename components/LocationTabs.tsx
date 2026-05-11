@@ -8,6 +8,7 @@ import {
   googleMapsDirectionsUrl,
   googleMapsEmbedSrc,
 } from "@/lib/addresses";
+import { branchPhoneById } from "@/lib/branchPhones";
 
 type LocationTabsProps = {
   isInView: boolean;
@@ -18,6 +19,7 @@ export const LocationTabs = ({ isInView }: LocationTabsProps) => {
   const [active, setActive] = useState<LocationTabId>("kozyatagi");
 
   const activeLocation = LOCATIONS.find((l) => l.id === active) ?? LOCATIONS[0];
+  const activePhones = branchPhoneById(activeLocation.id);
 
   const handleTabKeyDown = useCallback(
     (e: KeyboardEvent<HTMLButtonElement>, id: LocationTabId) => {
@@ -114,6 +116,31 @@ export const LocationTabs = ({ isInView }: LocationTabsProps) => {
                   {activeLocation.cityLine}
                 </p>
               ) : null}
+              <div className="mt-4 border-t border-gray-200/80 pt-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Telefon</p>
+                <div className="mt-2 flex flex-col gap-1.5">
+                  <a
+                    href={activePhones.landline.telHref}
+                    className={`text-sm font-semibold text-gray-900 sm:text-base ${
+                      activeLocation.id === "erenkoy"
+                        ? "hover:text-dark-green"
+                        : "hover:text-terracotta"
+                    }`}
+                  >
+                    {activePhones.landline.display}
+                  </a>
+                  <a
+                    href={activePhones.mobile.telHref}
+                    className={`text-sm font-semibold text-gray-800 sm:text-base ${
+                      activeLocation.id === "erenkoy"
+                        ? "hover:text-dark-green"
+                        : "hover:text-terracotta"
+                    }`}
+                  >
+                    {activePhones.mobile.display}
+                  </a>
+                </div>
+              </div>
             </div>
 
             <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-dark-green/10 bg-cream-dark/40 shadow-inner sm:aspect-[16/10]">

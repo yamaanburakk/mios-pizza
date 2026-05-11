@@ -61,7 +61,6 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
-  transpilePackages: ["react-pdf", "pdfjs-dist"],
   typescript: {
     ignoreBuildErrors: false,
   },
